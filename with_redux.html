@@ -15,10 +15,13 @@
   </head>
   <body>
     <script>
-      function reducer(){
-        
-      };
-      Redux.createStore();
+      function reducer(state, action) {
+        if (state === undefined) {
+          return { color: "yellow" };
+        }
+      }
+      var store = Redux.createStore(reducer);
+      var state = store.getState();
       let red = () => {
         document.querySelector("#red_box").style.backgroundColor = "#f00";
         document.querySelector("#green_box").style.backgroundColor = "#f00";
@@ -27,17 +30,22 @@
         document.querySelector("#red_box").style.backgroundColor = "#0f0";
         document.querySelector("#green_box").style.backgroundColor = "#0f0";
       };
-        
     </script>
-    
-    <div>
-      <div class="container" id="red_box">
-        <h1 class="red">red</h1>
-        <input type="button" value="fire" onClick={red}></input>
-      </div>
-      <div class="container" id="green_box">
-        <h1 class="green">green</h1>
-        <input type="button" value="fire" onClick={green}></input>
+
+    <div id="boxs">
+      <div>
+        <div
+          class="container"
+          id="red_box"
+          style="background-color: yellow;"
+        >
+          <h1 class="red">red</h1>
+          <input type="button" value="fire" onClick=red()></input>
+        </div>
+        <div class="container" id="green_box">
+          <h1 class="green">green</h1>
+          <input type="button" value="fire" onClick=green()></input>
+        </div>
       </div>
     </div>
   </body>
