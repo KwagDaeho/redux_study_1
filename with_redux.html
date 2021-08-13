@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.1/redux.min.js"
+      integrity="sha512-F21iSaHGX/3NFz5SuwoH6pGhTPxtoJoWWULqQVPQPtLm7nbK5r8vRSSSYy3Aj+H39cVrVm4+3ikGoVD1AjE0sQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="stylesheet" href="./src/App.css" />
+  </head>
+  <body>
+    <script>
+      function reducer(){
+        
+      };
+      Redux.createStore();
+      let red = () => {
+        document.querySelector("#red_box").style.backgroundColor = "#f00";
+        document.querySelector("#green_box").style.backgroundColor = "#f00";
+      };
+      let green = () => {
+        document.querySelector("#red_box").style.backgroundColor = "#0f0";
+        document.querySelector("#green_box").style.backgroundColor = "#0f0";
+      };
+        
+    </script>
+    
+    <div>
+      <div class="container" id="red_box">
+        <h1 class="red">red</h1>
+        <input type="button" value="fire" onClick={red}></input>
+      </div>
+      <div class="container" id="green_box">
+        <h1 class="green">green</h1>
+        <input type="button" value="fire" onClick={green}></input>
+      </div>
+    </div>
+  </body>
+</html>
