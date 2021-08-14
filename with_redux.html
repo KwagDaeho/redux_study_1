@@ -19,69 +19,65 @@
     <script>
       function reducer(state, action) {
         if (state === undefined) {
-          return { color: "#ccc" };
+          return { color: "#eee" };
         }
         var newState;
+
         if (action.type === "CHANGE_COLOR") {
           newState = Object.assign({}, state, {
-            color: document.getElementById("target_color").innerHTML,
+            color: event.target.value,
           }); /* 첫 번째 인자는 무조건 빈 객체 */
         }
         return newState;
       }
-
+      var store = Redux.createStore(reducer);
+      store.subscribe(ChangeBgc);
+      var state = store.getState();
       function ChangeBgc() {
         var state = store.getState();
         const containers = document.querySelectorAll(".container");
+        let randomGray = 50 + Math.ceil(Math.random() * 155);
+        let h1sColor = `rgb(${randomGray},${randomGray},${randomGray})`;
+
+        console.log("color : " + randomGray);
         for (var i = 0; i < containers.length; i++) {
           containers[i].style.backgroundColor = state.color;
-          console.log("box name: " + i + " ..to" + state.color);
+
+          console.log("box name : " + i + " ..to" + state.color);
         }
+
         const boxs = document.getElementById("boxs");
         boxs.innerHTML = `
           <section>
             <div
               class="container" id="red_box" style="background-color: ${state.color};">
-              <h1 class="red" id="target_color">#f00</h1>
+              <h1 class="red" style="color: ${h1sColor}">RED</h1>
               <input
                 type="button"
-                value="fire"
+                value="#f00"
                 onClick="store.dispatch({type:'CHANGE_COLOR'});"
               ></input>
             </div>
             <div class="container" id="green_box" style="background-color: ${state.color};">
-              <h1 class="green" id="target_color">#0f0</h1>
+              <h1 class="green" style="color: ${h1sColor}">GREEN</h1>
               <input
                 type="button"
-                value="fire"
+                value="#0f0"
+                onClick="store.dispatch({type:'CHANGE_COLOR'});">
+              </input>
+            </div>
+            <div class="container" id="blue_box" style="background-color: ${state.color};">
+              <h1 class="blue" style="color: ${h1sColor}">BLUE</h1>
+              <input
+                type="button"
+                value="#00f"
                 onClick="store.dispatch({type:'CHANGE_COLOR'});">
               </input>
             </div>
           </section>
         `;
       }
-
-      var store = Redux.createStore(reducer);
-      store.subscribe(ChangeBgc);
-      var state = store.getState();
-      const boxs = document.getElementById("boxs");
-      boxs.innerHTML = `
-        <section>
-          <div
-            class="container" id="red_box" style="background-color: ${state.color};">
-            <h1 class="red" id="target_color">#f00</h1>
-            <input
-              type="button"
-              value="fire"
-              onClick="store.dispatch({type:'CHANGE_COLOR'});"
-            ></input>
-          </div>
-          <div class="container" id="green_box" style="background-color: ${state.color};">
-            <h1 class="green" id="target_color">#0f0</h1>
-            <input type="button" value="fire" onClick=""></input>
-          </div>
-        </section>
-      `;
+      ChangeBgc();
     </script>
   </body>
 </html>
