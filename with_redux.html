@@ -30,11 +30,15 @@
         }
         return newState;
       }
-      var store = Redux.createStore(reducer);
-      store.subscribe(ChangeBgc);
+      var store = Redux.createStore(
+        reducer,
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          window.__REDUX_DEVTOOLS_EXTENSION__()
+      );
+
       var state = store.getState();
       function ChangeBgc() {
-        var state = store.getState();
+        state = store.getState();
         const containers = document.querySelectorAll(".container");
         let randomGray = 50 + Math.ceil(Math.random() * 155);
         let h1sColor = `rgb(${randomGray},${randomGray},${randomGray})`;
@@ -77,6 +81,8 @@
           </section>
         `;
       }
+      store.subscribe(ChangeBgc);
+
       ChangeBgc();
     </script>
   </body>

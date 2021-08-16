@@ -1,6 +1,9 @@
 import "./App.css";
 import WithoutRedux from "./components/without_redux";
 import WithRedux from "./components/with_redux";
+import React from "react";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
   return (
