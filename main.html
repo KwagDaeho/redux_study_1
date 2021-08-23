@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.1/redux.min.js"
+      integrity="sha512-F21iSaHGX/3NFz5SuwoH6pGhTPxtoJoWWULqQVPQPtLm7nbK5r8vRSSSYy3Aj+H39cVrVm4+3ikGoVD1AjE0sQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </head>
   <body>
     <div id="subject"></div>
@@ -22,10 +28,22 @@
         `;
       }
       function TOC() {
+        var state = store.getState();
+        var i = 0;
+        var liTags = "";
+        while (i < state.contents.length) {
+          liTags =
+            liTags +
+            `
+            <li>
+              <a href=${state.contents[i].id}>${state.contents[i].title}</a>
+            </li>
+            `;
+          i = i + 1;
+        }
         document.querySelector("#toc").innerHTML = `
           <ol>
-            <li><a href="1.html">HTML</a></li>
-            <li><a href="2.css">CSS</a></li>
+            ${liTags}
           </ol>
         `;
       }
@@ -43,6 +61,19 @@
           <p>HTML is....</p>
         `;
       }
+      function reducer(state, action) {
+        if (state === undefined) {
+          return {
+            contents: [
+              { id: 1, title: "HTML", desc: "HTML is..." },
+              { id: 2, title: "CSS", desc: "CSS is..." },
+            ],
+          };
+        }
+
+        return;
+      }
+      let store = Redux.createStore(reducer);
       subject();
       TOC();
       Control();
