@@ -60,16 +60,27 @@
         `;
       }
       function Main_content() {
+        let state = store.getState();
+        let i = 0;
+        let mainTitle, mainDesc;
+        while (i < state.contents.length) {
+          if (state.contents[i].id === state.selected_id) {
+            mainTitle = state.contents[i].title;
+            mainDesc = state.contents[i].desc;
+            break;
+          }
+          i = i + 1;
+        }
         document.querySelector("#main_content").innerHTML = `
-          <h2>HTML</h2>
-          <p>HTML is....</p>
+          <h2>${mainTitle}</h2>
+          <p>${mainDesc}</p>
         `;
       }
       function reducer(state, action) {
         console.log(state, action);
         if (state === undefined) {
           return {
-            selected_id: null,
+            selected_id: 1,
             contents: [
               { id: 1, title: "HTML", desc: "HTML is..." },
               { id: 2, title: "CSS", desc: "CSS is..." },
@@ -83,6 +94,7 @@
         return newState;
       }
       var store = Redux.createStore(reducer);
+      store.subscribe(Main_content);
       subject();
       TOC();
       Control();
