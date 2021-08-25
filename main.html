@@ -37,10 +37,10 @@
             `
             <li>
               <a onclick="
-              event.preventDefault();
-              var action = {type:'SELECT', id:${state.contents[i].id}}
-              store.dispatch(action);
-              " href=${state.contents[i].id}>${state.contents[i].title}</a>
+                event.preventDefault();
+                var action = {type:'SELECT', id:${state.contents[i].id}}
+                store.dispatch(action);
+              " href="${state.contents[i].id}">${state.contents[i].title}</a>
             </li>
             `;
           i = i + 1;
@@ -66,6 +66,7 @@
         `;
       }
       function reducer(state, action) {
+        console.log(state, action);
         if (state === undefined) {
           return {
             selected_id: null,
@@ -75,14 +76,13 @@
             ],
           };
         }
-        let newState;
+        var newState;
         if (action.type === "SELECT") {
           newState = Object.assign({}, state, { selected_id: action.id });
         }
-        console.log(action, state, newState);
         return newState;
       }
-      let store = Redux.createStore(reducer);
+      var store = Redux.createStore(reducer);
       subject();
       TOC();
       Control();
